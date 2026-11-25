@@ -1,0 +1,385 @@
+:root {
+  --yellow: #fbba00;
+  --blue: #4b86c6;
+  --pink: #d32c6a;
+  --green: #3fa535;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Poppins", Arial, sans-serif;
+  color: #fff;
+  background: #000;
+}
+
+.site-header {
+  height: 76px;
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  background: #1a1a1a;
+  border-bottom: 1px solid #303030;
+}
+
+.brand { width: 94px; margin-right: 55px; }
+.brand svg { display: block; width: 94px; }
+
+.primary-nav { display: flex; align-items: center; height: 100%; }
+.primary-nav a {
+  height: 100%;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  border-bottom: 3px solid transparent;
+}
+.primary-nav a.active { border-bottom-color: #fff; }
+
+.header-actions { margin-left: auto; display: flex; align-items: center; gap: 16px; }
+.search-button, .menu-button { border: 0; background: transparent; cursor: pointer; }
+.search-button svg { width: 22px; fill: none; stroke: #fff; stroke-width: 2; }
+.sign-in {
+  border: 1px solid #fff;
+  border-radius: 30px;
+  background: transparent;
+  color: #fff;
+  padding: 9px 19px;
+  font: 500 14px "Poppins", sans-serif;
+}
+.menu-button { display: none; width: 32px; }
+.menu-button span { display: block; height: 2px; margin: 5px 0; background: #fff; }
+
+.container { width: min(1180px, calc(100% - 48px)); margin: 0 auto; }
+.intro { background: #111; padding: 64px 0 24px; }
+.region-label { margin: 0 0 10px; color: var(--yellow); font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+.intro h1 { margin: 0 0 16px; font-size: clamp(34px, 5vw, 52px); line-height: 1.05; letter-spacing: -2px; }
+.intro p { max-width: 720px; margin: 0; color: #ddd; font-size: 16px; }
+
+.compare-section { min-height: 720px; padding: 26px 0 80px; background: #111; }
+.top-actions, .bottom-actions { display: flex; justify-content: flex-end; gap: 12px; height: 64px; }
+.bottom-actions { justify-content: center; height: auto; margin-top: 36px; }
+.compare-button, .cancel-button {
+  border: 0;
+  border-radius: 999px;
+  min-width: 112px;
+  height: 44px;
+  padding: 0 24px;
+  font: 600 14px "Poppins", sans-serif;
+  cursor: pointer;
+}
+.compare-button { background: #fff; color: #111; }
+.compare-button:disabled { background: #a9a9a9; color: #3d3d3d; cursor: default; }
+.cancel-button { display: none; background: transparent; color: #fff; border: 1px solid #fff; }
+.top-actions.has-selection .cancel-button, .bottom-actions.has-selection .cancel-button { display: block; }
+
+.package-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  align-items: stretch;
+}
+
+.package-card {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #353535;
+  border-radius: 12px;
+  background: #171717;
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  cursor: pointer;
+}
+.package-card:hover { border-color: #777; transform: translateY(-3px); }
+.package-card.selected { border: 2px solid #fff; box-shadow: 0 0 0 2px rgba(255,255,255,.15); }
+
+.package-banner {
+  min-height: 116px;
+  padding: 18px 70px 18px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 90% 15%, rgba(255,255,255,.12), transparent 23px),
+    linear-gradient(135deg, #262626 0%, #090909 70%);
+  border-bottom: 4px solid;
+}
+.package-banner span { font-size: 22px; font-weight: 800; font-style: italic; letter-spacing: -1px; }
+.package-banner strong { font-size: 29px; line-height: 1; font-style: italic; letter-spacing: -1.5px; }
+.package-banner.starter { border-color: var(--yellow); }
+.package-banner.starter strong { color: var(--yellow); }
+.package-banner.select { border-color: #e30613; }
+.package-banner.select strong { color: #e30613; }
+.package-banner.sports { border-color: var(--green); }
+.package-banner.sports strong { color: #69ba55; }
+.package-banner.ultimate { border-color: #fff; }
+.package-banner.ultimate strong { color: #fff; }
+
+.card-select {
+  position: absolute;
+  z-index: 3;
+  top: 14px;
+  right: 12px;
+  min-height: 32px;
+  padding: 0 9px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #888;
+  border-radius: 999px;
+  background: rgba(0,0,0,.5);
+  color: #fff;
+  font: 500 10px "Poppins", sans-serif;
+  cursor: pointer;
+}
+.card-select .checkmark {
+  display: block;
+  width: 13px;
+  height: 13px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+}
+.package-card.selected .card-select { border-color: #fff; background: #fff; color: #111; }
+.package-card.selected .card-select .checkmark {
+  position: relative;
+  border-color: #111;
+}
+.package-card.selected .card-select .checkmark::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 3px;
+  top: 3px;
+  left: 3px;
+  border-left: 2px solid #111;
+  border-bottom: 2px solid #111;
+  transform: rotate(-45deg);
+}
+
+.card-body {
+  min-height: 470px;
+  padding: 20px 20px 22px;
+  display: flex;
+  flex-direction: column;
+  background: #171717;
+}
+.plan-fit { min-height: 42px; margin: 0 0 14px; color: #ddd; font-size: 12px; line-height: 1.5; }
+.channels {
+  margin: 0 0 18px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: #242424;
+  color: #fff;
+  line-height: 1.4;
+}
+.channels strong { display: block; font-size: 20px; }
+.channels span { color: #bbb; font-size: 11px; }
+.highlights { font-size: 12px; line-height: 1.5; }
+.highlights > strong { color: #fff; font-size: 12px; }
+.highlights ul { margin: 9px 0 0; padding-left: 17px; color: #ddd; }
+.highlights li { margin: 6px 0; }
+.price { margin-top: auto; padding-top: 20px; }
+.price span { display: block; margin-bottom: 4px; color: #bbb; font-size: 11px; }
+.price p { margin: 0; font-size: 32px; line-height: 1.1; font-weight: 700; }
+.price b { font-size: 17px; vertical-align: top; }
+.price small { color: #bbb; font-size: 12px; font-weight: 500; }
+.choose-plan {
+  width: 100%;
+  min-height: 44px;
+  margin-top: 16px;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  color: #111;
+  font: 700 13px "Poppins", sans-serif;
+  cursor: pointer;
+  transition: background .15s ease, transform .15s ease;
+}
+.choose-plan:hover { background: #fbba00; transform: translateY(-1px); }
+.choose-plan:focus-visible, .card-select:focus-visible { outline: 3px solid #fbba00; outline-offset: 3px; }
+
+footer { background: #fff; color: #111; min-height: 130px; }
+.footer-inner { width: min(1180px, calc(100% - 48px)); margin: 0 auto; padding: 28px 0; }
+.footer-brand { font-size: 31px; font-weight: 900; font-style: italic; letter-spacing: -2px; }
+.footer-inner p { font-size: 11px; }
+
+.plan-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.plan-modal.open { display: flex; }
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(0, 0, 0, .78);
+  backdrop-filter: blur(5px);
+}
+.account-card {
+  position: relative;
+  z-index: 1;
+  width: min(440px, 100%);
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  border-radius: 12px;
+  background: #fff;
+  color: #111;
+  padding: 28px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .45);
+}
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: #eee;
+  color: #111;
+  font-size: 26px;
+  line-height: 30px;
+  cursor: pointer;
+}
+.selected-plan {
+  margin: -28px -28px 24px;
+  padding: 22px 58px 18px 28px;
+  background: #111;
+  color: #fff;
+  border-radius: 12px 12px 0 0;
+  border-bottom: 3px solid #fbba00;
+}
+.selected-plan span {
+  display: block;
+  color: #bbb;
+  font-size: 12px;
+}
+.selected-plan strong { display: block; font-size: 22px; }
+.selected-plan p { margin: 4px 0 0; color: #ddd; font-size: 13px; }
+.account-card h2 { margin: 0 0 6px; font-size: 24px; }
+.account-help { margin: 0 0 18px; color: #666; font-size: 13px; }
+.number-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid #d7d7d7;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+.number-tab {
+  height: 44px;
+  border: 0;
+  border-right: 1px solid #d7d7d7;
+  background: #fff;
+  color: #555;
+  font: 600 12px "Poppins", sans-serif;
+  cursor: pointer;
+}
+.number-tab:last-child { border-right: 0; }
+.number-tab.active { background: #111; color: #fff; }
+#accountForm label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 13px; }
+#accountNumber {
+  width: 100%;
+  height: 50px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  padding: 0 14px;
+  color: #111;
+  font: 500 16px "Poppins", sans-serif;
+}
+#accountNumber:focus { outline: 2px solid #111; outline-offset: 1px; }
+.payment-section {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid #e6e6e6;
+}
+.payment-section h3 {
+  margin: 0 0 10px;
+  font-size: 14px;
+}
+.payment-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.payment-option {
+  min-height: 82px;
+  border: 1px solid #d4d4d4;
+  border-radius: 8px;
+  background: #fff;
+  color: #111;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font: 600 12px "Poppins", sans-serif;
+  cursor: pointer;
+}
+.payment-option.selected {
+  border: 2px solid #111;
+  background: #f7f7f7;
+}
+.payment-option:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+.payment-status { min-height: 18px; margin: 10px 0 0; color: #555; font-size: 12px; }
+.payment-logo {
+  height: 24px;
+  display: flex;
+  align-items: center;
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: -1px;
+}
+.airtel-logo { color: #ed1c24; font-size: 20px; }
+.orange-logo {
+  color: #111;
+  background: #ff7900;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  font-size: 8px;
+  letter-spacing: 0;
+  font-style: normal;
+}
+
+body.modal-open { overflow: hidden; }
+
+@media (max-width: 980px) {
+  .package-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .card-body { min-height: 400px; }
+  .primary-nav { display: none; }
+  .menu-button { display: block; }
+}
+
+@media (max-width: 580px) {
+  .site-header { height: 66px; padding: 0 18px; }
+  .brand, .brand svg { width: 82px; }
+  .sign-in { display: none; }
+  .container, .footer-inner { width: calc(100% - 32px); }
+  .intro { padding-top: 40px; }
+  .intro h1 { letter-spacing: -1px; }
+  .compare-section { padding-top: 16px; }
+  .top-actions { height: 56px; }
+  .package-grid { grid-template-columns: 1fr; gap: 16px; }
+  .package-banner { min-height: 94px; padding: 14px 82px 14px 18px; }
+  .package-banner span { font-size: 18px; }
+  .package-banner strong { font-size: 25px; }
+  .card-body { min-height: auto; padding: 18px; }
+  .plan-fit { min-height: auto; margin-bottom: 12px; }
+  .channels { margin-bottom: 16px; }
+  .highlights li { margin: 5px 0; }
+  .price { padding-top: 16px; }
+  .choose-plan { margin-top: 14px; }
+}

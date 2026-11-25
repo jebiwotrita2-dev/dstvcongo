@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comparer les offres et les chaînes DStv | DStv RDC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="Accueil DStv RDC">
+      <svg viewBox="0 0 122 44" role="img" aria-label="DStv DRC">
+        <rect width="122" height="44" rx="3" fill="#fff"/>
+        <text x="8" y="32" fill="#000" font-family="Arial Black,Arial" font-size="29" font-style="italic" font-weight="900">DStv</text>
+        <text x="83" y="30" fill="#000" font-family="Arial, sans-serif" font-size="9" font-weight="700">DRC</text>
+      </svg>
+    </a>
+    <nav class="primary-nav" aria-label="Navigation principale">
+      <a href="#">Découvrir</a>
+      <a href="#" class="active">Acheter</a>
+      <a href="#">Regarder</a>
+      <a href="#">Mon DStv</a>
+    </nav>
+    <div class="header-actions">
+      <button class="search-button" aria-label="Rechercher">
+        <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg>
+      </button>
+      <button class="sign-in">Se connecter</button>
+      <button class="menu-button" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div class="container">
+        <p class="region-label">DStv DRC</p>
+        <h1>Regardez DStv à votre façon !</h1>
+        <p>Comparez nos offres et trouvez celle qui vous convient.</p>
+      </div>
+    </section>
+
+    <section class="compare-section">
+      <div class="container">
+        <div class="top-actions">
+          <button class="cancel-button" type="button">Annuler</button>
+          <button class="compare-button" type="button" disabled>Comparer</button>
+        </div>
+
+        <div class="package-grid" id="packageGrid">
+          <article class="package-card" data-name="DStv Essentiel" data-plan-id="starter">
+            <button class="card-select" type="button" aria-label="Ajouter DStv Essentiel à la comparaison" aria-pressed="false">
+              <span class="checkmark"></span><span class="compare-label">Comparer</span>
+            </button>
+            <div class="package-banner starter"><span>DStv</span><strong>ESSENTIEL</strong></div>
+            <div class="card-body">
+              <p class="plan-fit">Le divertissement au quotidien à petit prix</p>
+              <p class="channels"><strong>70+ chaînes</strong><span>Chaînes HD incluses</span></p>
+              <div class="highlights">
+                <strong>À découvrir</strong>
+                <ul>
+                  <li>Films, musique et divertissement</li>
+                  <li>Vos programmes locaux préférés</li>
+                  <li>Supersport Kickoff</li>
+                  <li>M-Net Legends</li>
+                </ul>
+              </div>
+              <div class="price"><span>Prix mensuel</span><p><b>$</b>5 <small>/ mois</small></p></div>
+              <button class="choose-plan" type="button">Choisir Essentiel</button>
+            </div>
+          </article>
+
+          <article class="package-card" data-name="DStv Sélection" data-plan-id="select">
+            <button class="card-select" type="button" aria-label="Ajouter DStv Sélection à la comparaison" aria-pressed="false"><span class="checkmark"></span><span class="compare-label">Comparer</span></button>
+            <div class="package-banner select"><span>DStv</span><strong>SÉLECTION</strong></div>
+            <div class="card-body">
+              <p class="plan-fit">Plus de séries, de films et de sport en direct</p>
+              <p class="channels"><strong>100+ chaînes</strong><span>Chaînes HD incluses</span></p>
+              <div class="highlights">
+                <strong>À découvrir</strong>
+                <ul>
+                  <li>Art de vivre, musique et documentaires</li>
+                  <li>Une sélection de matchs de Premier League et de Ligue des champions</li>
+                  <li>Programmes jeunesse, films, séries et fictions locales</li>
+                  <li>La chaîne WWE, 24 h/24 et 7 j/7</li>
+                </ul>
+              </div>
+              <div class="price"><span>Prix mensuel</span><p><b>$</b>15 <small>/ mois</small></p></div>
+              <button class="choose-plan" type="button">Choisir Sélection</button>
+            </div>
+          </article>
+
+          <article class="package-card" data-name="DStv Sport" data-plan-id="sports">
+            <button class="card-select" type="button" aria-label="Ajouter DStv Sport à la comparaison" aria-pressed="false"><span class="checkmark"></span><span class="compare-label">Comparer</span></button>
+            <div class="package-banner sports"><span>DStv</span><strong>SPORT</strong></div>
+            <div class="card-body">
+              <p class="plan-fit">Pour les passionnés de football, de WWE et d’UFC</p>
+              <p class="channels"><strong>100+ chaînes</strong><span>Chaînes HD incluses</span></p>
+              <div class="highlights">
+                <strong>À découvrir</strong>
+                <ul>
+                  <li>Les plus grands championnats de football</li>
+                  <li>WWE et UFC</li>
+                  <li>Le meilleur du divertissement local</li>
+                  <li>Films et séries internationaux</li>
+                  <li>Programmes jeunesse et chaînes éducatives</li>
+                </ul>
+              </div>
+              <div class="price"><span>Prix mensuel</span><p><b>$</b>20 <small>/ mois</small></p></div>
+              <button class="choose-plan" type="button">Choisir Sport</button>
+            </div>
+          </article>
+
+          <article class="package-card" data-name="DStv Intégral" data-plan-id="ultimate">
+            <button class="card-select" type="button" aria-label="Ajouter DStv Intégral à la comparaison" aria-pressed="false"><span class="checkmark"></span><span class="compare-label">Comparer</span></button>
+            <div class="package-banner ultimate"><span>DStv</span><strong>INTÉGRAL</strong></div>
+            <div class="card-body">
+              <p class="plan-fit">Le meilleur du sport et du divertissement, réuni</p>
+              <p class="channels"><strong>130+ chaînes</strong><span>Chaînes HD incluses</span></p>
+              <div class="highlights">
+                <strong>À découvrir</strong>
+                <ul>
+                  <li>Football, tennis, F1, golf et rugby</li>
+                  <li>M-Net &amp; M-Net Movies+</li>
+                  <li>Discovery Channel et bien plus</li>
+                </ul>
+              </div>
+              <div class="price"><span>Prix mensuel</span><p><b>$</b>30 <small>/ mois</small></p></div>
+              <button class="choose-plan" type="button">Choisir Intégral</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="bottom-actions">
+          <button class="cancel-button" type="button">Annuler</button>
+          <button class="compare-button" type="button" disabled>Comparer</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">DStv</div>
+      <p>&copy; 2026 MultiChoice Africa Holdings BV. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <div class="plan-modal" id="planModal" aria-hidden="true">
+    <button class="modal-backdrop" type="button" aria-label="Fermer le formulaire de l’offre"></button>
+    <section class="account-card" role="dialog" aria-modal="true" aria-labelledby="accountTitle">
+      <button class="modal-close" type="button" aria-label="Fermer">&times;</button>
+      <div class="selected-plan">
+        <span>Offre sélectionnée</span>
+        <strong id="selectedPlanName">DStv Essentiel</strong>
+        <p id="selectedPlanPrice">À partir de 5 $ / mois</p>
+      </div>
+      <h2 id="accountTitle">Saisissez vos informations</h2>
+      <p class="account-help">Saisissez votre numéro de décodeur DStv ou votre numéro de compte pour activer le paiement.</p>
+
+      <div class="number-tabs" role="tablist" aria-label="Type de numéro">
+        <button class="number-tab active" type="button" role="tab" aria-selected="true" data-number-type="decoder">Numéro de décodeur</button>
+        <button class="number-tab" type="button" role="tab" aria-selected="false" data-number-type="account">Numéro de compte</button>
+      </div>
+
+      <div id="accountForm">
+        <label id="numberLabel" for="accountNumber">Numéro de décodeur</label>
+        <input id="accountNumber" name="accountNumber" type="text" inputmode="numeric" autocomplete="off" placeholder="Saisissez votre numéro de décodeur" maxlength="20">
+      </div>
+
+      <div class="payment-section" id="paymentSection" aria-live="polite">
+        <h3>Payer avec</h3>
+        <div class="payment-options">
+          <button class="payment-option airtel-option" type="button" aria-pressed="false" disabled>
+            <span class="payment-logo airtel-logo">airtel</span>
+            <span>Airtel Money</span>
+          </button>
+          <button class="payment-option orange-option" type="button" aria-pressed="false" disabled>
+            <span class="payment-logo orange-logo">Orange</span>
+            <span>Orange Money</span>
+          </button>
+        </div>
+        <p class="payment-status" id="paymentStatus" role="status" aria-live="polite">Saisissez au moins 6 chiffres ci-dessus pour activer les moyens de paiement.</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

