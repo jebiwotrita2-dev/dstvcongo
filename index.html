@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compare DStv Packages and Channels | DStv DRC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="DStv DRC home">
+      <svg viewBox="0 0 122 44" role="img" aria-label="DStv DRC">
+        <rect width="122" height="44" rx="3" fill="#fff"/>
+        <text x="8" y="32" fill="#000" font-family="Arial Black,Arial" font-size="29" font-style="italic" font-weight="900">DStv</text>
+        <text x="83" y="30" fill="#000" font-family="Arial, sans-serif" font-size="9" font-weight="700">DRC</text>
+      </svg>
+    </a>
+    <nav class="primary-nav" aria-label="Primary navigation">
+      <a href="#">Explore</a>
+      <a href="#" class="active">Buy</a>
+      <a href="#">Watch</a>
+      <a href="#">MyDStv</a>
+    </nav>
+    <div class="header-actions">
+      <button class="search-button" aria-label="Search">
+        <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg>
+      </button>
+      <button class="sign-in">Sign in</button>
+      <button class="menu-button" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div class="container">
+        <p class="region-label">DStv DRC</p>
+        <h1>Watch DStv Your Way!</h1>
+        <p>Select packages to compare what channels are available and find your perfect match.</p>
+      </div>
+    </section>
+
+    <section class="compare-section">
+      <div class="container">
+        <div class="top-actions">
+          <button class="cancel-button" type="button">Cancel</button>
+          <button class="compare-button" type="button" disabled>Compare</button>
+        </div>
+
+        <div class="package-grid" id="packageGrid">
+          <article class="package-card" data-name="DStv Starter" data-plan-id="starter">
+            <button class="card-select" type="button" aria-label="Add DStv Starter to comparison" aria-pressed="false">
+              <span class="checkmark"></span><span class="compare-label">Compare</span>
+            </button>
+            <div class="package-banner starter"><span>DStv</span><strong>STARTER</strong></div>
+            <div class="card-body">
+              <p class="plan-fit">Affordable everyday entertainment</p>
+              <p class="channels"><strong>70+ channels</strong><span>Includes HD channels</span></p>
+              <div class="highlights">
+                <strong>Popular with</strong>
+                <ul>
+                  <li>Movies, Music &amp; Entertainment</li>
+                  <li>Local favourites</li>
+                  <li>Supersport Kickoff</li>
+                  <li>M-Net Legends</li>
+                </ul>
+              </div>
+              <div class="price"><span>Monthly price</span><p><b>$</b>5 <small>/ month</small></p></div>
+              <button class="choose-plan" type="button">Choose Starter</button>
+            </div>
+          </article>
+
+          <article class="package-card" data-name="DStv Select" data-plan-id="select">
+            <button class="card-select" type="button" aria-label="Add DStv Select to comparison" aria-pressed="false"><span class="checkmark"></span><span class="compare-label">Compare</span></button>
+            <div class="package-banner select"><span>DStv</span><strong>SELECT</strong></div>
+            <div class="card-body">
+              <p class="plan-fit">More series, movies and selected live sport</p>
+              <p class="channels"><strong>100+ channels</strong><span>Includes HD channels</span></p>
+              <div class="highlights">
+                <strong>Popular with</strong>
+                <ul>
+                  <li>Lifestyle, music and documentaries</li>
+                  <li>Selected Premier League &amp; Champions League</li>
+                  <li>Kids, movies, series and local dramas</li>
+                  <li>WWE 24/7 channel</li>
+                </ul>
+              </div>
+              <div class="price"><span>Monthly price</span><p><b>$</b>15 <small>/ month</small></p></div>
+              <button class="choose-plan" type="button">Choose Select</button>
+            </div>
+          </article>
+
+          <article class="package-card" data-name="DStv Sports" data-plan-id="sports">
+            <button class="card-select" type="button" aria-label="Add DStv Sports to comparison" aria-pressed="false"><span class="checkmark"></span><span class="compare-label">Compare</span></button>
+            <div class="package-banner sports"><span>DStv</span><strong>SPORTS</strong></div>
+            <div class="card-body">
+              <p class="plan-fit">For fans of football, WWE and UFC</p>
+              <p class="channels"><strong>100+ channels</strong><span>Includes HD channels</span></p>
+              <div class="highlights">
+                <strong>Popular with</strong>
+                <ul>
+                  <li>All football from the best leagues</li>
+                  <li>WWE &amp; UFC</li>
+                  <li>The best of local entertainment</li>
+                  <li>International movies and series</li>
+                  <li>Kids and educational channels</li>
+                </ul>
+              </div>
+              <div class="price"><span>Monthly price</span><p><b>$</b>20 <small>/ month</small></p></div>
+              <button class="choose-plan" type="button">Choose Sports</button>
+            </div>
+          </article>
+
+          <article class="package-card" data-name="DStv Ultimate" data-plan-id="ultimate">
+            <button class="card-select" type="button" aria-label="Add DStv Ultimate to comparison" aria-pressed="false"><span class="checkmark"></span><span class="compare-label">Compare</span></button>
+            <div class="package-banner ultimate"><span>DStv</span><strong>ULTIMATE</strong></div>
+            <div class="card-body">
+              <p class="plan-fit">The complete mix of sport and entertainment</p>
+              <p class="channels"><strong>130+ channels</strong><span>Includes HD channels</span></p>
+              <div class="highlights">
+                <strong>Popular with</strong>
+                <ul>
+                  <li>Football, tennis, F1, golf and rugby</li>
+                  <li>M-Net &amp; M-Net Movies+</li>
+                  <li>Discovery Channel and more</li>
+                </ul>
+              </div>
+              <div class="price"><span>Monthly price</span><p><b>$</b>30 <small>/ month</small></p></div>
+              <button class="choose-plan" type="button">Choose Ultimate</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="bottom-actions">
+          <button class="cancel-button" type="button">Cancel</button>
+          <button class="compare-button" type="button" disabled>Compare</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">DStv</div>
+      <p>&copy; 2026 MultiChoice Africa Holdings BV. All rights reserved</p>
+    </div>
+  </footer>
+
+  <div class="plan-modal" id="planModal" aria-hidden="true">
+    <button class="modal-backdrop" type="button" aria-label="Close plan form"></button>
+    <section class="account-card" role="dialog" aria-modal="true" aria-labelledby="accountTitle">
+      <button class="modal-close" type="button" aria-label="Close">&times;</button>
+      <div class="selected-plan">
+        <span>Selected plan</span>
+        <strong id="selectedPlanName">DStv Starter</strong>
+        <p id="selectedPlanPrice">From $5 / month</p>
+      </div>
+      <h2 id="accountTitle">Enter your details</h2>
+      <p class="account-help">Enter your DStv decoder or account number to enable payment.</p>
+
+      <div class="number-tabs" role="tablist" aria-label="Account number type">
+        <button class="number-tab active" type="button" role="tab" aria-selected="true" data-number-type="decoder">Decoder number</button>
+        <button class="number-tab" type="button" role="tab" aria-selected="false" data-number-type="account">Account number</button>
+      </div>
+
+      <div id="accountForm">
+        <label id="numberLabel" for="accountNumber">Decoder number</label>
+        <input id="accountNumber" name="accountNumber" type="text" inputmode="numeric" autocomplete="off" placeholder="Enter your decoder number" maxlength="20">
+      </div>
+
+      <div class="payment-section" id="paymentSection" aria-live="polite">
+        <h3>Pay via</h3>
+        <div class="payment-options">
+          <button class="payment-option airtel-option" type="button" aria-pressed="false" disabled>
+            <span class="payment-logo airtel-logo">airtel</span>
+            <span>Airtel Money</span>
+          </button>
+          <button class="payment-option orange-option" type="button" aria-pressed="false" disabled>
+            <span class="payment-logo orange-logo">Orange</span>
+            <span>Orange Money</span>
+          </button>
+        </div>
+        <p class="payment-status" id="paymentStatus" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
